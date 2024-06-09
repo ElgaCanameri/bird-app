@@ -26,6 +26,14 @@ export class BirdsService {
     }
     return bird;
   }
+  
+  async findOneByName(name: string): Promise<Bird> {
+    const bird = await this.birdModel.findOne({ name }).exec();
+    if (!bird) {
+      throw new NotFoundException(`Bird with name "${name}" not found`);
+    }
+    return bird;
+  }
 
   async update(id: string, updateBirdDto: UpdateBirdDto): Promise<Bird> {
     const existingBird = await this.birdModel.findByIdAndUpdate(id, updateBirdDto, { new: true }).exec();

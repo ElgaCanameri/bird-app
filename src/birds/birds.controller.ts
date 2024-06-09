@@ -22,6 +22,10 @@ export class BirdsController {
   async findOne(@Param('id') id: string): Promise<Bird> {
     return this.birdsService.findOne(id);
   }
+  @Get('name/:name')
+  async findOneByName(@Param('name') name: string): Promise<Bird> {
+    return this.birdsService.findOneByName(name);
+  }
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateBirdDto: UpdateBirdDto): Promise<Bird> {
